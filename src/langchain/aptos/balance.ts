@@ -8,11 +8,11 @@ export class AptosBalanceTool extends Tool {
   If you want to get the balance of your wallet, you don't need to provide the mint.
   If no mint is provided, the balance will be in APT.
   if you want to get balance of a fungible asset, you need to provide the asset address as mint
+	If user prompt doesn't specify if USDT is layerzero, the address needs to be "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b"
+	If user prompt doesn't specify if USDC is layerzero, the address needs to be "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b"
   
   Popular tokens that can be checked include:
   - APT: "0x1::aptos_coin::AptosCoin"
-  - USDT: "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT"
-  - USDC: "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC"
   - CASH: "0x61ed8b048636516b4eaf4c74250fa4f9440d9c3e163d96aeb863fe658a4bdc67::CASH::CASH"
   - USDt: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b"
   - USDC: "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b"

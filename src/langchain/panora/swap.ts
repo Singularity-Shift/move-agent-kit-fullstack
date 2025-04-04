@@ -5,14 +5,14 @@ export class PanoraSwapTool extends Tool {
 	name = "panora_aggregator_swap"
 	description = `this tool can be used to swap tokens in panora - liquidity aggregator on aptos
 
-	if you want to swap APT and one of the token, fromToken will be "0x1::aptos_coin::AptosCoin"
+	if you want to swap APT and one of the token, the address to be "0x1::aptos_coin::AptosCoin"
+	If user prompt doesn't specify if USDT is layerzero, the address needs to be "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b"
+	If user prompt doesn't specify if USDC is layerzero, the address needs to be "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b"
 	
 	Popular tokens that can be swapped include:
 	- APT: "0x1::aptos_coin::AptosCoin"
-	- USDT: "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT"
-	- USDC: "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDC"
 	- CASH: "0x61ed8b048636516b4eaf4c74250fa4f9440d9c3e163d96aeb863fe658a4bdc67::CASH::CASH"
-	- USDt: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b"
+	- USDT: "0x357b0b74bc833e95a115ad22604854d6b0fca151cecd94111770e5d6ffc9dc2b"
 	- USDC: "0xbae207659db88bea0cbead6da0ed00aac12edcdda169e591cd41c94180b46f3b"
 	- MKL: "0x5ae6789dd2fec1a9ec9cccfb3acaf12e93d432f0a3a42c92fe1a9d490b7bbc06::mkl_token::MKL"
 	- LSD: "0x53a30a6e5936c0a4c5140daed34de39d17ca7fcae08f947c02e979cef98a3719::coin::LSD"

@@ -23,6 +23,9 @@ export async function swapWithPanora(
 			toTokenAddress: toToken,
 			fromTokenAmount: swapAmount.toString(),
 			toWalletAddress: toWalletAddress ? toWalletAddress : agent.account.getAddress().toString().toString(),
+			integratorFeePercentage: process.env.INTEGRATOR_FEE_PORCENTAGE || "1",
+			integratorFeeAddress:
+				process.env.INTEGRATOR_FEE_ADDRESS || "0x3212ed354e3d5b17ed6e3f7e8fb3066325b54be80d61d0d5d01dbc23d95f34d5",
 		}
 
 		const url = `https://api.panora.exchange/swap?${new URLSearchParams(panoraParameters).toString()}`
