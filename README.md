@@ -1,6 +1,6 @@
 <div align="center">
 
-# Move Agent Kit
+# Move Agent Kit Fullstack
 
 An open-source toolkit for connecting AI agents to Move/Aptos protocols.
 

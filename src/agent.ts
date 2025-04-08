@@ -52,7 +52,7 @@ import {
 	placeMarketOrderWithMerkleTrade,
 } from "./tools/merkletrade"
 import { createImage } from "./tools/openai"
-import { swapWithPanora } from "./tools/panora"
+import { listWithPanora, priceWithPanora, swapWithPanora } from "./tools/panora"
 import {
 	addLiquidityWithThala,
 	createPoolWithThala,
@@ -243,6 +243,14 @@ export class AgentRuntime {
 
 	swapWithPanora(fromToken: string, toToken: string, swapAmount: number, toWalletAddress?: string) {
 		return swapWithPanora(this, fromToken, toToken, swapAmount, toWalletAddress)
+	}
+
+	listWithPanora(tokenAddress?: string, panoraUI?: boolean, panoraTags?: string) {
+		return listWithPanora(this, tokenAddress, panoraUI, panoraTags)
+	}
+
+	priceWithPanora(tokenAddress: string) {
+		return priceWithPanora(this, tokenAddress)
 	}
 
 	// openai

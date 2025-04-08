@@ -51,7 +51,7 @@ import {
 	MerkleTradePlaceMarketOrderTool,
 } from "./merkletrade"
 import { OpenAICreateImageTool } from "./openai"
-import { PanoraSwapTool } from "./panora"
+import { PanoraListTool, PanoraPriceTool, PanoraSwapTool } from "./panora"
 import {
 	ThalaAddLiquidityTool,
 	ThalaMintMODTool,
@@ -109,6 +109,8 @@ export const createAptosTools = (agent: AgentRuntime, config: { filter?: ToolsNa
 		new ThalaCreatePoolTool(agent),
 		// Panora tools
 		new PanoraSwapTool(agent),
+		new PanoraPriceTool(agent),
+		new PanoraListTool(agent),
 		// OpenAI tools
 		new OpenAICreateImageTool(agent),
 		// Echo tools

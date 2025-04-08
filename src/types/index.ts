@@ -35,6 +35,8 @@ export type ToolsNameList =
 	| "thala_unstake_token"
 	| "thala_stake_token"
 	| "panora_aggregator_swap"
+	| "panora_aggregator_price"
+	| "panora_aggregator_list"
 	| "openai_create_image"
 	| "echo_stake_token"
 	| "echo_unstake_token"
