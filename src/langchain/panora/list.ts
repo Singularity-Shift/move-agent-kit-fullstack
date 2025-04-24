@@ -65,7 +65,7 @@ export class PanoraListTool extends Tool {
   - "Show me all banned tokens on Panora"
 
   Inputs ( input is a JSON string ):
-  tokeAddress: string, eg "0x1::aptos_coin::AptosCoin" or "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT" (optional)
+  tokeAddress: string, eg "0x1::aptos_coin::AptosCoin" or "0xf22bede237a07e121b56d91a491eb7bcdfd1f5907926a9e58338f964a01b17fa::asset::USDT" (required only for token details and token price but not request list)
   panoraUI: boolean,  If set to true, only tokens that are visible on the Panora UI are returned. Set as false to get all tokens in the list. Default is true. (optional)
   panoraTags: string, Possible tags "Native", "Emojicoin", "Meme", "Verified", "Recognized", "Unverified", "Banned", "InternalFA", "Tokens" (optional). eg "Meme" (optional)
   `
