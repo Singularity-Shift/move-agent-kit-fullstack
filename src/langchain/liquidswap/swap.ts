@@ -1,6 +1,7 @@
 import { convertAmountFromHumanReadableToOnChain } from "@aptos-labs/ts-sdk"
 import { Tool } from "langchain/tools"
 import { type AgentRuntime, parseJson } from "../.."
+import { AGENT_CLIENT_MODE } from "../../constants"
 import { getTokenByTokenName } from "../../utils/get-pool-address-by-token-name"
 import { parseFungibleAssetAddressToWrappedAssetAddress } from "../../utils/parse-fungible-asset-to-wrapped-asset"
 
@@ -39,9 +40,17 @@ minCoinOut: number, eg 1 or 0.01 (optional)`
 		super()
 	}
 
-	protected async _call(input: string): Promise<string> {
+	protected async _call(input: string) {
 		try {
 			const parsedInput = parseJson(input)
+
+			if (AGENT_CLIENT_MODE) {
+				return {
+					name: this.name,
+					args: Object.values(parsedInput),
+					onchain: true,
+				}
+			}
 
 			let mintX = parsedInput.mintX
 			const tokenX = getTokenByTokenName(mintX)

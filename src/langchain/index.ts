@@ -8,6 +8,7 @@ import {
 	AptosGetTokenDetailTool,
 	AptosGetTokenPriceTool,
 	AptosMintTokenTool,
+	AptosTransactionHistoryTool,
 	AptosTransactionTool,
 	AptosTransferTokenTool,
 } from "./aptos"
@@ -72,6 +73,7 @@ export const createAptosTools = (agent: AgentRuntime, config: { filter?: ToolsNa
 		new AptosBurnTokenTool(agent),
 		// new AptosTransferNFTTool(agent),
 		new AptosTransactionTool(agent),
+		new AptosTransactionHistoryTool(agent),
 		new AptosGetTokenDetailTool(agent),
 		new AptosMintTokenTool(agent),
 		new AptosCreateTokenTool(agent),

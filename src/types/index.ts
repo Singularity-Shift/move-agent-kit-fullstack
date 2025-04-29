@@ -6,6 +6,7 @@ export type ToolsNameList =
 	| "aptos_transfer_token"
 	| "aptos_burn_token"
 	| "aptos_get_transaction"
+	| "aptos_get_transaction_history"
 	| "aptos_token_details"
 	| "aptos_mint_token"
 	| "aptos_create_token"

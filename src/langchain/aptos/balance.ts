@@ -1,5 +1,6 @@
 import { Tool } from "langchain/tools"
 import { type AgentRuntime, parseJson } from "../.."
+import { AGENT_CLIENT_MODE } from "../../constants"
 
 export class AptosBalanceTool extends Tool {
 	name = "aptos_balance"
@@ -76,9 +77,18 @@ export class AptosBalanceTool extends Tool {
 		super()
 	}
 
-	protected async _call(input: string): Promise<string> {
+	protected async _call(input: string) {
 		try {
 			const parsedInput = parseJson(input)
+
+			if (AGENT_CLIENT_MODE) {
+				return {
+					name: this.name,
+					args: Object.values(parsedInput)?.length ? Object.values(parsedInput) : [input],
+					onchain: true,
+				}
+			}
+
 			const mint = parsedInput.mint || undefined
 			const mintDetails: any = this.agent.getTokenDetails(mint)
 			const balance = await this.agent.getBalance(mint)
