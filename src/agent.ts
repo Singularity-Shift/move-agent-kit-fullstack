@@ -15,6 +15,7 @@ import {
 	getTokenDetails,
 	getTokenPrice,
 	getTransaction,
+	getTransactionHistory,
 	getUserAllPositions,
 	getUserPosition,
 	lendToken,
@@ -103,6 +104,10 @@ export class AgentRuntime {
 
 	getTransaction(hash: string) {
 		return getTransaction(this, hash)
+	}
+
+	getTransactionHistory(page?: number, limit?: number) {
+		return getTransactionHistory(this, page, limit)
 	}
 
 	burnToken(amount: number, mint: string) {
@@ -241,8 +246,14 @@ export class AgentRuntime {
 
 	// panora
 
-	swapWithPanora(fromToken: string, toToken: string, swapAmount: number, toWalletAddress?: string) {
-		return swapWithPanora(this, fromToken, toToken, swapAmount, toWalletAddress)
+	swapWithPanora(
+		fromToken: string,
+		toToken: string,
+		swapAmount: number,
+		toWalletAddress?: string,
+		validateSkipFees?: (agent: AgentRuntime, account: string) => Promise<boolean>
+	) {
+		return swapWithPanora(this, fromToken, toToken, swapAmount, toWalletAddress, validateSkipFees)
 	}
 
 	listWithPanora(tokenAddress?: string, panoraUI?: boolean, panoraTags?: string) {
@@ -311,8 +322,13 @@ export class AgentRuntime {
 		return registerMarketEmojicoin(this, emojis)
 	}
 
-	swapEmojicoins(emojis: SymbolEmoji[], Amount: number, isSelling: boolean) {
-		return swapEmojicoins(this, emojis, Amount, isSelling)
+	swapEmojicoins(
+		emojis: SymbolEmoji[],
+		Amount: number,
+		isSelling: boolean,
+		validateSkipFees?: (agent: AgentRuntime, account: string) => Promise<boolean>
+	) {
+		return swapEmojicoins(this, emojis, Amount, isSelling, validateSkipFees)
 	}
 
 	provideLiquidityEmojicoin(emojis: SymbolEmoji[], amount: number) {

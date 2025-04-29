@@ -16,9 +16,16 @@ export async function swapEmojicoins(
 	agent: AgentRuntime,
 	emojis: SymbolEmoji[],
 	amount: number,
-	isSelling: boolean
+	isSelling: boolean,
+	validateSkipFees?: (agent: AgentRuntime, account: string) => Promise<boolean>
 ): Promise<{ hash: string }> {
 	try {
+		let skipFees = false
+
+		if (validateSkipFees) {
+			skipFees = await validateSkipFees(agent, agent.account.getAddress().toString())
+		}
+
 		const marketAddress = getMarketAddress(emojis).toString()
 
 		const committedTransactionHash = await agent.account.sendTransaction({
@@ -31,7 +38,7 @@ export async function swapEmojicoins(
 					amount,
 					isSelling,
 					process.env.EMOJI_INTEGRATOR || "0x3212ed354e3d5b17ed6e3f7e8fb3066325b54be80d61d0d5d01dbc23d95f34d5",
-					50,
+					skipFees ? 0 : process.env.EMOJI_FEES || 50,
 					1,
 				],
 			},

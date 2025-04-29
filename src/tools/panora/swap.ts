@@ -1,5 +1,5 @@
-import axios from "axios"
 import type { AgentRuntime } from "../../agent"
+import { getSwapDetails } from "../../utils/get-swap-detail-panora"
 
 /**
  * Swap tokens in panora
@@ -15,37 +15,18 @@ export async function swapWithPanora(
 	fromToken: string,
 	toToken: string,
 	swapAmount: number,
-	toWalletAddress?: string
+	toWalletAddress?: string,
+	validateSkipFees?: (agent: AgentRuntime, account: string) => Promise<boolean>
 ): Promise<string> {
 	try {
-		const panoraParameters = {
-			fromTokenAddress: fromToken,
-			toTokenAddress: toToken,
-			fromTokenAmount: swapAmount.toString(),
-			toWalletAddress: toWalletAddress ? toWalletAddress : agent.account.getAddress().toString().toString(),
-			integratorFeePercentage: process.env.INTEGRATOR_FEE_PORCENTAGE || "1",
-			integratorFeeAddress:
-				process.env.INTEGRATOR_FEE_ADDRESS || "0x3212ed354e3d5b17ed6e3f7e8fb3066325b54be80d61d0d5d01dbc23d95f34d5",
-		}
-
-		const url = "https://api.panora.exchange/swap"
-
-		const panoraApiKey = agent.config.PANORA_API_KEY
-		if (!panoraApiKey) {
-			throw new Error("No PANORA_API_KEY in config")
-		}
-
-		const res = await axios.post(
-			url,
-			{},
-			{
-				headers: {
-					"x-api-key": panoraApiKey,
-				},
-				params: panoraParameters,
-			}
+		const response = await getSwapDetails(
+			agent,
+			fromToken,
+			toToken,
+			swapAmount,
+			toWalletAddress || agent.account.getAddress().toString(),
+			validateSkipFees
 		)
-		const response = await res.data
 
 		if (response.quotes.length <= 0) {
 			throw new Error("no quotes available from panora")

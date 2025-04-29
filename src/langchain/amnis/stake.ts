@@ -1,6 +1,7 @@
 import { AccountAddress, convertAmountFromHumanReadableToOnChain } from "@aptos-labs/ts-sdk"
 import { Tool } from "langchain/tools"
 import { type AgentRuntime, parseJson } from "../.."
+import { AGENT_CLIENT_MODE } from "../../constants"
 
 export class AmnisStakeTool extends Tool {
 	name = "amnis_stake"
@@ -22,9 +23,17 @@ export class AmnisStakeTool extends Tool {
 		super()
 	}
 
-	protected async _call(input: string): Promise<string> {
+	protected async _call(input: string) {
 		try {
 			const parsedInput = parseJson(input)
+
+			if (AGENT_CLIENT_MODE) {
+				return {
+					name: this.name,
+					args: Object.values(parsedInput),
+					onchain: true,
+				}
+			}
 
 			const recipient = AccountAddress.from(parsedInput.recipient) || this.agent.account.getAddress().toString()
 
